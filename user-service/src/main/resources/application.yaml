@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: user-service
+  profiles:
+    active: "@env@"
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: MySyna.pro@gmail.com
+    password: usun wzpk ipjt sosb
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
