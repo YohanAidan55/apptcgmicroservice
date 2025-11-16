@@ -1,7 +1,7 @@
-package com.aidan.productservice.controller.dto.tcg.lorcana;
+package com.aidan.collectionservice.client.dto.tcg.lorcana;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.aidan.productservice.controller.dto.LorcanaProductDto;
+import com.aidan.collectionservice.client.dto.LorcanaProductDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

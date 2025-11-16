@@ -1,7 +1,7 @@
-package com.aidan.productservice.controller.dto.tcg.onepiece;
+package com.aidan.collectionservice.client.dto.tcg.onepiece;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.aidan.productservice.controller.dto.OnePieceProductDto;
+import com.aidan.collectionservice.client.dto.OnePieceProductDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

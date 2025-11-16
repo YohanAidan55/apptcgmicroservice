@@ -1,13 +1,9 @@
 package com.aidan.security.autoconfig;
 
+import com.aidan.security.config.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import com.aidan.security.config.SecurityConfig;
-import com.aidan.security.config.ClientConfig;
-import com.aidan.security.config.ApplicationConfig;
-import com.aidan.security.config.CorsConfig;
-import com.aidan.security.config.SwaggerConfig;
 import com.aidan.security.jwt.JwtService;
 import com.aidan.security.client.WebClientUserClient;
 import com.aidan.security.jwt.JwtAuthenticationFilter;
@@ -30,7 +26,8 @@ import com.aidan.security.oauth2.CustomOAuth2UserService;
         WebClientUserClient.class,
         JwtAuthenticationFilter.class,
         OAuth2SuccessHandler.class,
-        CustomOAuth2UserService.class
+        CustomOAuth2UserService.class,
+        FeignClientConfig.class
 })
 public class SecurityAutoConfiguration {
 }

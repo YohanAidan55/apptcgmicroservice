@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    AbstractProductDto get(@PathVariable UUID id) {
+    AbstractProductDto get(@PathVariable("id") UUID id) {
         return productService.get(id);
     }
 

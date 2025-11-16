@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ai
+      changes:
+        - createTable:
+            tableName: collection
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: total_products
+                  type: integer
+  - changeSet:
+      id: 2
+      author: ai
+      changes:
+        - createTable:
+            tableName: collection_product
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: collection_id
+                  type: varchar(36)
+              - column:
+                  name: product_id
+                  type: varchar(36)
+              - column:
+                  name: quantity
+                  type: integer
+        - addForeignKeyConstraint:
+            baseTableName: collection_product
+            baseColumnNames: collection_id
+            referencedTableName: collection
+            constraintName: fk_collection_product_collection
+            referencedColumnNames: id
+
