@@ -16,6 +16,7 @@ import org.mapstruct.SubclassMapping;
 import org.mapstruct.SubclassMappings;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper(componentModel = "spring", subclassExhaustiveStrategy = SubclassExhaustiveStrategy.RUNTIME_EXCEPTION)
 public abstract class ProductMapper {

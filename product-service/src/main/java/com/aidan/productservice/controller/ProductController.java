@@ -7,13 +7,10 @@ import com.aidan.productservice.service.ProductLorcanaSingleSyncService;
 import com.aidan.productservice.service.ProductService;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,6 +26,11 @@ public class ProductController {
             @Parameter(description = "Filtre des produits")
             @ModelAttribute ProductFilter filter) {
         return productService.getAll(filter);
+    }
+
+    @GetMapping("/{id}")
+    AbstractProductDto get(@PathVariable UUID id) {
+        return productService.get(id);
     }
 
     @GetMapping("/lorcana")

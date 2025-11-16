@@ -66,7 +66,7 @@ public class ProductLorcanaSingleSyncService {
             while (it.hasNext()) {
                 JsonNode node = it.next();
                 Integer productId = firstInt(node, "idProduct", "id", "product_id");
-                String name = firstText(node, "name", "title", "productName");
+                String name = firstText(node, "name", "title", "name");
                 String description = firstText(node, "description", "longDescription", "desc");
                 Integer categoryId = firstInt(node, "idCategory", "category_id");
                 String categoryName = firstText(node, "categoryName", "category_name");

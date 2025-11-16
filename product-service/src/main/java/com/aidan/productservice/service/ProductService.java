@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -39,6 +40,12 @@ public class ProductService {
     public List<AbstractProductDto> getOnePieceAll(ProductFilter filter) {
         Specification<OnePieceProductEntity> spec = SpecificationBuilder.fromFilter(filter);
         return productMapper.toDtoList(new ArrayList<>(onePieceProductRepository.findAll(spec)));
+    }
+
+    public AbstractProductDto get(UUID id) {
+        return productRepository.findById(id)
+                .map(productMapper::toDto)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
     }
 }
 
