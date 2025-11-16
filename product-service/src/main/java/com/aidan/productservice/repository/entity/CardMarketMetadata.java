@@ -1,27 +1,16 @@
 package com.aidan.productservice.repository.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "card_market_metadata")
+@Embeddable
 @Getter
 @Setter
-@AllArgsConstructor
-public class CardMarketMetadataEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+public class CardMarketMetadata {
 
     @Column(name = "product_id")
     private Integer productId;
@@ -40,7 +29,5 @@ public class CardMarketMetadataEntity {
 
     @Column(name = "expansion_id")
     private Integer expansionId;
-
-    public CardMarketMetadataEntity() {}
 }
 

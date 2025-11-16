@@ -49,7 +49,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_product
               - column:
-                  name: name
+                  name: product_name
                   type: VARCHAR(255)
               - column:
                   name: description
@@ -61,14 +61,23 @@ databaseChangeLog:
                   name: product_family_type
                   type: VARCHAR(31)
               - column:
-                  name: card_market_metadata_id
-                  type: UUID
-        - addForeignKeyConstraint:
-            baseTableName: product
-            baseColumnNames: card_market_metadata_id
-            constraintName: fk_product_card_market_metadata
-            referencedTableName: card_market_metadata
-            referencedColumnNames: id
+                  name: card_market_product_id
+                  type: INT
+              - column:
+                  name: card_market_name
+                  type: VARCHAR(255)
+              - column:
+                  name: card_market_category_id
+                  type: INT
+              - column:
+                  name: card_market_category_name
+                  type: VARCHAR(255)
+              - column:
+                  name: card_market_metacard_id
+                  type: INT
+              - column:
+                  name: card_market_expansion_id
+                  type: INT
 
   - changeSet:
       id: 1761906509387-3

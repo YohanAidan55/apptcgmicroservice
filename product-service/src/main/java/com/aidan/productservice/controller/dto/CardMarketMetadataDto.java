@@ -12,7 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CardMarketMetadataDto {
-    private UUID id;
     private Integer productId;
     private String name;
     private Integer categoryId;

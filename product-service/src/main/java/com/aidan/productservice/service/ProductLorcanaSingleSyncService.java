@@ -2,7 +2,7 @@ package com.aidan.productservice.service;
 
 import com.aidan.productservice.repository.ProductRepository;
 import com.aidan.productservice.repository.entity.AbstractProductEntity;
-import com.aidan.productservice.repository.entity.CardMarketMetadataEntity;
+import com.aidan.productservice.repository.entity.CardMarketMetadata;
 import com.aidan.productservice.repository.entity.tcg.lorcana.LorcanaCardEntity;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -80,7 +80,7 @@ public class ProductLorcanaSingleSyncService {
                     if (exists) continue;
                 }
 
-                CardMarketMetadataEntity meta = new CardMarketMetadataEntity();
+                CardMarketMetadata meta = new CardMarketMetadata();
                 meta.setProductId(productId);
                 meta.setName(name);
                 meta.setCategoryId(categoryId);
@@ -89,7 +89,7 @@ public class ProductLorcanaSingleSyncService {
                 meta.setExpansionId(expansionId);
 
                 LorcanaCardEntity card = new LorcanaCardEntity();
-                card.setName(name != null ? name : "");
+                card.setProductName(name != null ? name : "");
                 card.setDescription(description != null ? description : "");
                 card.setCardMarketMetadata(meta);
 

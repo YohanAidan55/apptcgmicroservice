@@ -20,7 +20,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", subclassExhaustiveStrategy = SubclassExhaustiveStrategy.RUNTIME_EXCEPTION)
 public abstract class ProductMapper {
 
-    public abstract CardMarketMetadataDto toDto(CardMarketMetadataEntity e);
+    public abstract CardMarketMetadataDto toDto(CardMarketMetadata e);
 
     @SubclassMappings({
             @SubclassMapping(source = LorcanaCardEntity.class, target = LorcanaCardDto.class),

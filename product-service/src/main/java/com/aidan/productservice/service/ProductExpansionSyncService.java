@@ -3,7 +3,7 @@ package com.aidan.productservice.service;
 import com.aidan.productservice.repository.ExpansionRepository;
 import com.aidan.productservice.repository.ProductRepository;
 import com.aidan.productservice.repository.entity.AbstractProductEntity;
-import com.aidan.productservice.repository.entity.CardMarketMetadataEntity;
+import com.aidan.productservice.repository.entity.CardMarketMetadata;
 import com.aidan.productservice.repository.entity.ExpansionEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,7 @@ public class ProductExpansionSyncService {
         List<AbstractProductEntity> modified = products.stream()
                 .filter(Objects::nonNull)
                 .map(p -> {
-                    CardMarketMetadataEntity meta = p.getCardMarketMetadata();
+                    CardMarketMetadata meta = p.getCardMarketMetadata();
                     if (meta == null || meta.getExpansionId() == null) {
                         return null;
                     }

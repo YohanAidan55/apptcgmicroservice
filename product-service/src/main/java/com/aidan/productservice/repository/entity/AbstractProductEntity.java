@@ -21,7 +21,7 @@ public abstract class AbstractProductEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String name;
+    private String productName;
 
     private String description;
 
@@ -29,9 +29,8 @@ public abstract class AbstractProductEntity {
     @Column(name = "product_family_type", insertable = false, updatable = false)
     private ProductFamilyType productFamilyType;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "card_market_metadata_id")
-    private CardMarketMetadataEntity cardMarketMetadata;
+    @Embedded
+    private CardMarketMetadata cardMarketMetadata;
 
     @Column(name = "expansion_name")
     private String expansionName;

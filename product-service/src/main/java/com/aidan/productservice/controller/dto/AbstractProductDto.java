@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public abstract class AbstractProductDto {
     private UUID id;
-    private String name;
+    private String productName;
     private String description;
     private ProductFamilyType productFamilyType;
     private CardMarketMetadataDto cardMarketMetadata;
