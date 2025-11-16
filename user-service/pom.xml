@@ -13,22 +13,8 @@
     <!-- version inherited from parent -->
      <name>user-service</name>
      <description>user-service</description>
-     <url/>
-     <licenses>
-         <license/>
-     </licenses>
-     <developers>
-         <developer/>
-     </developers>
-     <scm>
-         <connection/>
-         <developerConnection/>
-         <tag/>
-         <url/>
-     </scm>
      <properties>
          <java.version>${java.version}</java.version>
-         <!-- no local spring-cloud.version property, parent provides it -->
      </properties>
 
      <dependencies>
@@ -39,6 +25,10 @@
          <dependency>
              <groupId>org.springframework.boot</groupId>
              <artifactId>spring-boot-starter-data-jpa</artifactId>
+         </dependency>
+         <dependency>
+             <groupId>org.liquibase</groupId>
+             <artifactId>liquibase-core</artifactId>
          </dependency>
          <dependency>
              <groupId>org.springframework.boot</groupId>
@@ -72,6 +62,7 @@
          <dependency>
              <groupId>org.projectlombok</groupId>
              <artifactId>lombok</artifactId>
+             <version>${lombok.version}</version>
              <optional>true</optional>
          </dependency>
 
@@ -99,11 +90,14 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-compiler-plugin</artifactId>
+                 <version>3.10.1</version>
                  <configuration>
+                     <release>${maven.compiler.release}</release>
                      <annotationProcessorPaths>
                          <path>
                              <groupId>org.projectlombok</groupId>
                              <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
                          </path>
                         <path>
                             <groupId>org.mapstruct</groupId>
@@ -138,6 +132,9 @@
     <profiles>
         <profile>
             <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <env>local</env>
             </properties>
@@ -145,7 +142,7 @@
         <profile>
             <id>prod</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <env>prod</env>

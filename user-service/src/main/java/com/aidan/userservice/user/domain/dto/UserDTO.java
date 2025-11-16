@@ -19,7 +19,6 @@ public class UserDTO implements UserContract {
     private String lastName;
     private String userName;
     private String email;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String password;
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private RoleEnum role;

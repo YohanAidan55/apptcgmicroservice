@@ -1,0 +1,256 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1761906509387-9
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_expansion
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: card_market_expansion_id
+                  type: INT
+
+  - changeSet:
+      id: 1761906509387-10
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "a3b4c5d6-7890-4067-8290-123456789103"
+              - column:
+                  name: name
+                  value: "Expansion 5434"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5434
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "b4c5d6e7-8901-4078-93a1-234567890114"
+              - column:
+                  name: name
+                  value: "Expansion 5435"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5435
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "c5d6e7f8-9012-4089-a4b2-345678901125"
+              - column:
+                  name: name
+                  value: "Expansion 5502"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5502
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "d6e7f8a9-0123-409a-b5c3-456789012136"
+              - column:
+                  name: name
+                  value: "Expansion 5512"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5512
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "e7f8a9b0-1234-40ab-c6d4-567890123147"
+              - column:
+                  name: name
+                  value: "Expansion 5567"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5567
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "f8a9b0c1-2345-40bc-d7e5-678901234158"
+              - column:
+                  name: name
+                  value: "Expansion 5697"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5697
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "a9b0c1d2-3456-40cd-e8f6-789012345169"
+              - column:
+                  name: name
+                  value: "Expansion 5764"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5764
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "b0c1d2e3-4567-40de-f907-890123456170"
+              - column:
+                  name: name
+                  value: "Expansion 5792"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5792
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "c1d2e3f4-5678-40ef-0a18-901234567181"
+              - column:
+                  name: name
+                  value: "Expansion 5823"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5823
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "d2e3f4a5-6789-4100-1b29-012345678192"
+              - column:
+                  name: name
+                  value: "Expansion 5844"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5844
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "e3f4a5b6-7890-4111-2c3a-123456789203"
+              - column:
+                  name: name
+                  value: "Expansion 5853"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5853
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "f4a5b6c7-8901-4122-3d4b-234567890214"
+              - column:
+                  name: name
+                  value: "Expansion 5895"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 5895
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "a5b6c7d8-9012-4133-4e5c-345678901225"
+              - column:
+                  name: name
+                  value: "Expansion 6013"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 6013
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "b6c7d8e9-0123-4144-5f6d-456789012236"
+              - column:
+                  name: name
+                  value: "Expansion 6086"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 6086
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "c7d8e9f0-1234-4155-607e-567890123247"
+              - column:
+                  name: name
+                  value: "Expansion 6087"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 6087
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "d8e9f0a1-2345-4166-718f-678901234258"
+              - column:
+                  name: name
+                  value: "Expansion 6170"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 6170
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "e9f0a1b2-3456-4177-8290-789012345269"
+              - column:
+                  name: name
+                  value: "Expansion 6207"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 6207
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "f0a1b2c3-4567-4188-93a1-890123456270"
+              - column:
+                  name: name
+                  value: "Expansion 6208"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 6208
+        - insert:
+            tableName: expansion
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-5678-4199-a4b2-901234567281"
+              - column:
+                  name: name
+                  value: "Expansion 6339"
+              - column:
+                  name: card_market_expansion_id
+                  valueNumeric: 6339

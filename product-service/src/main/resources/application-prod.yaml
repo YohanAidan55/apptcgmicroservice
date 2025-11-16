@@ -1,31 +1,30 @@
 spring:
-  application:
-    name: user-service
   datasource:
-    url: jdbc:postgresql://dpg-d43m5hbipnbc73c30ocg-a.frankfurt-postgres.render.com:5432/apptcgdb
-    username: user
-    password: iLaF3984q04R9JxpNOfUVUlDdWoZEGD4
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:mem:DB_CATALOG
+    username: sa
+    password:
   jpa:
     hibernate:
       ddl-auto: none
+    show-sql: true
     properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: false
+      hibernate.dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
   security:
     oauth2:
       client:
         registration:
           google:
-            client-id: 23598433919-0oq7kvbh9h920vug4dst1gncsuoshrmm.apps.googleusercontent.com
-            client-secret: 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
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
             scope:
               - email
               - profile
         provider:
           google:
-            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
             token-uri: https://oauth2.googleapis.com/token
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
   liquibase:
@@ -34,11 +33,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-server:
-  port: 8082
 jwt:
   secret: ${JWT_SECRET:YOUR_VERY_LONG_SECRET_HERE}
   expiration-ms: 604800000 # 7 days en ms
 app:
   oauth2:
-    redirect-url: http://localhost:5173/oauth2/callback?token=
+    redirect-url: http://localhost:8100/oauth2/callback

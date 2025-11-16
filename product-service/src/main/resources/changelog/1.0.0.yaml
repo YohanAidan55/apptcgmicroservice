@@ -1,0 +1,209 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1761906509387-1
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: card_market_metadata
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_card_market_metadata
+              - column:
+                  name: product_id
+                  type: INT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: category_id
+                  type: INT
+              - column:
+                  name: category_name
+                  type: VARCHAR(255)
+              - column:
+                  name: metacard_id
+                  type: INT
+              - column:
+                  name: expansion_id
+                  type: INT
+
+  - changeSet:
+      id: 1761906509387-2
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_product
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: expansion_name
+                  type: VARCHAR(255)
+              - column:
+                  name: product_family_type
+                  type: VARCHAR(31)
+              - column:
+                  name: card_market_metadata_id
+                  type: UUID
+        - addForeignKeyConstraint:
+            baseTableName: product
+            baseColumnNames: card_market_metadata_id
+            constraintName: fk_product_card_market_metadata
+            referencedTableName: card_market_metadata
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 1761906509387-3
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: lorcana_product
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_lorcana_product
+              - column:
+                  name: product_sub_type
+                  type: VARCHAR(31)
+        - addForeignKeyConstraint:
+            baseTableName: lorcana_product
+            baseColumnNames: id
+            constraintName: fk_lorcana_product_product
+            referencedTableName: product
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 1761906509387-4
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: onepiece_product
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_onepiece_product
+              - column:
+                  name: product_sub_type
+                  type: VARCHAR(31)
+        - addForeignKeyConstraint:
+            baseTableName: onepiece_product
+            baseColumnNames: id
+            constraintName: fk_onepiece_product_product
+            referencedTableName: product
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 1761906509387-5
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: lorcana_product_card
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_lorcana_product_card
+        - addForeignKeyConstraint:
+            baseTableName: lorcana_product_card
+            baseColumnNames: id
+            constraintName: fk_lorcana_product_card_lorcana_product
+            referencedTableName: lorcana_product
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 1761906509387-6
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: lorcana_product_sealed
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_lorcana_product_sealed
+        - addForeignKeyConstraint:
+            baseTableName: lorcana_product_sealed
+            baseColumnNames: id
+            constraintName: fk_lorcana_product_sealed_lorcana_product
+            referencedTableName: lorcana_product
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 1761906509387-7
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: onepiece_product_card
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_onepiece_product_card
+        - addForeignKeyConstraint:
+            baseTableName: onepiece_product_card
+            baseColumnNames: id
+            constraintName: fk_onepiece_product_card_onepiece_product
+            referencedTableName: onepiece_product
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 1761906509387-8
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: onepiece_product_sealed
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_onepiece_product_sealed
+        - addForeignKeyConstraint:
+            baseTableName: onepiece_product_sealed
+            baseColumnNames: id
+            constraintName: fk_onepiece_product_sealed_onepiece_product
+            referencedTableName: onepiece_product
+            referencedColumnNames: id

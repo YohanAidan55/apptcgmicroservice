@@ -15,7 +15,10 @@ import org.springframework.context.annotation.Configuration;
                 version = "1.0",
                 description = "API documentation for your Spring Boot TCGApp"
         ),
-        security = @SecurityRequirement(name = "bearerAuth")
+        security = {
+                @SecurityRequirement(name = "bearerAuth"),
+                @SecurityRequirement(name = "basicAuth")
+        }
 )
 @SecurityScheme(
         name = "bearerAuth",
@@ -24,6 +27,12 @@ import org.springframework.context.annotation.Configuration;
         type = SecuritySchemeType.HTTP,
         bearerFormat = "JWT",
         in = SecuritySchemeIn.HEADER
+)
+@SecurityScheme(
+        name = "basicAuth",
+        type = SecuritySchemeType.HTTP,
+        scheme = "basic",
+        description = "Email/Mot de passe classique"
 )
 public class SwaggerConfig {
 }

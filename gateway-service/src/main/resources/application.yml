@@ -15,6 +15,12 @@ spring:
                 - Path=/api/users/**
               filters:
                 - StripPrefix=2
+            - id: product-service
+              uri: lb://product-service
+              predicates:
+                - Path=/api/products/**
+              filters:
+                - StripPrefix=2
 
 
 springdoc:
@@ -24,6 +30,8 @@ springdoc:
     urls:
       - name: user-service
         url: api/users/v3/api-docs
+      - name: product-service
+        url: api/products/v3/api-docs
 
 eureka:
   client:
