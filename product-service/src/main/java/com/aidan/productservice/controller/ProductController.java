@@ -22,10 +22,10 @@ public class ProductController {
     private final ProductLorcanaSingleSyncService productLorcanaSingleSyncService;
     private final ProductExpansionSyncService productExpansionSyncService;
 
-    @GetMapping
+    @PostMapping
     List<AbstractProductDto> getAll(
             @Parameter(description = "Filtre des produits")
-            @ModelAttribute @Nullable ProductFilter filter) {
+            @RequestBody(required = false) @Nullable ProductFilter filter) {
         return productService.getAll(filter == null ? new ProductFilter() : filter);
     }
 
@@ -34,17 +34,17 @@ public class ProductController {
         return productService.get(id);
     }
 
-    @GetMapping("/lorcana")
+    @PostMapping("/lorcana")
     List<AbstractProductDto> getLorcana(
             @Parameter(description = "Filtre des produits Lorcana")
-            @ModelAttribute @Nullable ProductFilter filter) {
+            @RequestBody(required = false) @Nullable ProductFilter filter) {
         return productService.getLorcanaAll(filter == null ? new ProductFilter() : filter);
     }
 
-    @GetMapping("/onepiece")
+    @PostMapping("/onepiece")
     List<AbstractProductDto> getOnePiece(
             @Parameter(description = "Filtre des produits One Piece")
-            @ModelAttribute @Nullable ProductFilter filter) {
+            @RequestBody(required = false) @Nullable ProductFilter filter) {
         return productService.getOnePieceAll(filter == null ? new ProductFilter() : filter);
     }
 
