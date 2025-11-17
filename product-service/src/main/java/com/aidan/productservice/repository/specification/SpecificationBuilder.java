@@ -22,7 +22,7 @@ public final class SpecificationBuilder {
 
         if (filter.getName() != null && !filter.getName().isBlank()) {
             Operation op = Operation.fromString(filter.getNameOperation().name());
-            specs.add(buildSpec("name", op, filter.getName()));
+            specs.add(buildSpec("productName", op, filter.getName()));
         }
 
         boolean useOr = filter.getCombineOperator() == ProductFilter.CombineOperator.OR;
