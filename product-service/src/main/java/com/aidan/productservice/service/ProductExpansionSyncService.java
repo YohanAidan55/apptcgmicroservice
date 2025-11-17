@@ -24,7 +24,7 @@ public class ProductExpansionSyncService {
     private final ExpansionRepository expansionRepository;
 
     /**
-     * Parcourt tous les produits et renseigne product.expansionName en se basant sur
+     * Parcourt tous les produits et renseigne product.expansion en se basant sur
      * cardMarketMetadata.expansionId -> table expansion.card_market_expansion_id
      */
     @Transactional
@@ -53,11 +53,13 @@ public class ProductExpansionSyncService {
                         return null;
                     }
 
-                    String newName = expansionOpt.get().getName();
-                    String current = p.getExpansionName();
+                    ExpansionEntity expansion = expansionOpt.get();
 
-                    if (!Objects.equals(current, newName)) {
-                        p.setExpansionName(newName);
+                    // Si le produit n'a pas d'expansion associée ou si l'association est différente,
+                    // on associe l'entité expansion complète au produit.
+                    if (p.getExpansion() == null
+                            || !Objects.equals(p.getExpansion().getCardMarketExpansionId(), expansion.getCardMarketExpansionId())) {
+                        p.setExpansion(expansion);
                         return p;
                     }
                     return null;

@@ -1,5 +1,6 @@
 package com.aidan.productservice.controller.dto;
 
+import com.aidan.productservice.repository.entity.ExpansionEntity;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.aidan.productservice.domain.ProductFamilyType;
@@ -25,5 +26,6 @@ public abstract class AbstractProductDto {
     private String description;
     private ProductFamilyType productFamilyType;
     private CardMarketMetadataDto cardMarketMetadata;
-    private String expansionName;
+    private ExpansionEntity expansion;
+    private String imageUrl;
 }

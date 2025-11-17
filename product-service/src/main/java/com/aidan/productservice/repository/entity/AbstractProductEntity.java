@@ -32,8 +32,8 @@ public abstract class AbstractProductEntity {
     @Embedded
     private CardMarketMetadata cardMarketMetadata;
 
-    @Column(name = "expansion_name")
-    private String expansionName;
+    @OneToOne(fetch = FetchType.EAGER)
+    private ExpansionEntity expansion;
 
     protected AbstractProductEntity(ProductFamilyType type) {
         this.productFamilyType = type;

@@ -17,6 +17,8 @@ public class ExpansionEntity {
 
     private String name;
 
+    private String code;
+
     @Column(name = "card_market_expansion_id")
     private Integer cardMarketExpansionId;
 }

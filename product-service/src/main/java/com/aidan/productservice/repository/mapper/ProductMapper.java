@@ -10,13 +10,17 @@ import com.aidan.productservice.repository.entity.tcg.lorcana.LorcanaCardEntity;
 import com.aidan.productservice.repository.entity.tcg.lorcana.LorcanaSealedEntity;
 import com.aidan.productservice.repository.entity.tcg.onePiece.OnePieceCardEntity;
 import com.aidan.productservice.repository.entity.tcg.onePiece.OnePieceSealedEntity;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.SubclassExhaustiveStrategy;
 import org.mapstruct.SubclassMapping;
 import org.mapstruct.SubclassMappings;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Mapper(componentModel = "spring", subclassExhaustiveStrategy = SubclassExhaustiveStrategy.RUNTIME_EXCEPTION)
 public abstract class ProductMapper {
@@ -37,4 +41,25 @@ public abstract class ProductMapper {
     public abstract OnePieceSealedDto toDto(OnePieceSealedEntity e);
 
     public abstract List<AbstractProductDto> toDtoList(List<? extends AbstractProductEntity> entities);
+
+    @AfterMapping
+    protected void addImageUrl(AbstractProductEntity source, @MappingTarget AbstractProductDto target) {
+        CardMarketMetadataDto meta = target.getCardMarketMetadata();
+        if (meta == null) {
+            return;
+        }
+
+        Integer categoryId = meta.getCategoryId();
+        Integer productId = meta.getProductId();
+
+        if (categoryId == null || productId == null) {
+            return;
+        }
+
+
+        String url = String.format("https://product-images.s3.cardmarket.com/%d/%s/%d/%d.jpg",
+                categoryId, source.getExpansion().getCode(), productId, productId);
+
+        target.setImageUrl(url);
+    }
 }

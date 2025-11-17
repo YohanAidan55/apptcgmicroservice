@@ -5,7 +5,7 @@ databaseChangeLog:
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
-            tableName: card_market_metadata
+            tableName: expansion
             columns:
               - column:
                   name: id
@@ -13,26 +13,16 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
-                    primaryKeyName: pk_card_market_metadata
-              - column:
-                  name: product_id
-                  type: INT
+                    primaryKeyName: pk_expansion
               - column:
                   name: name
                   type: VARCHAR(255)
               - column:
-                  name: category_id
-                  type: INT
-              - column:
-                  name: category_name
+                  name: code
                   type: VARCHAR(255)
               - column:
-                  name: metacard_id
+                  name: card_market_expansion_id
                   type: INT
-              - column:
-                  name: expansion_id
-                  type: INT
-
   - changeSet:
       id: 1761906509387-2
       author: yohanaidan
@@ -55,9 +45,6 @@ databaseChangeLog:
                   name: description
                   type: TEXT
               - column:
-                  name: expansion_name
-                  type: VARCHAR(255)
-              - column:
                   name: product_family_type
                   type: VARCHAR(31)
               - column:
@@ -78,6 +65,16 @@ databaseChangeLog:
               - column:
                   name: card_market_expansion_id
                   type: INT
+              - column:
+                  name: expansion_id
+                  type: UUID
+
+        - addForeignKeyConstraint:
+            baseTableName: product
+            baseColumnNames: expansion_id
+            constraintName: fk_product_expansion
+            referencedTableName: expansion
+            referencedColumnNames: id
 
   - changeSet:
       id: 1761906509387-3
