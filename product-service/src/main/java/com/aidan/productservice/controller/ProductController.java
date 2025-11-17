@@ -7,6 +7,7 @@ import com.aidan.productservice.service.ProductLorcanaSingleSyncService;
 import com.aidan.productservice.service.ProductService;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class ProductController {
     @GetMapping
     List<AbstractProductDto> getAll(
             @Parameter(description = "Filtre des produits")
-            @ModelAttribute ProductFilter filter) {
-        return productService.getAll(filter);
+            @ModelAttribute @Nullable ProductFilter filter) {
+        return productService.getAll(filter == null ? new ProductFilter() : filter);
     }
 
     @GetMapping("/{id}")
@@ -36,15 +37,15 @@ public class ProductController {
     @GetMapping("/lorcana")
     List<AbstractProductDto> getLorcana(
             @Parameter(description = "Filtre des produits Lorcana")
-            @ModelAttribute ProductFilter filter) {
-        return productService.getLorcanaAll(filter);
+            @ModelAttribute @Nullable ProductFilter filter) {
+        return productService.getLorcanaAll(filter == null ? new ProductFilter() : filter);
     }
 
     @GetMapping("/onepiece")
     List<AbstractProductDto> getOnePiece(
             @Parameter(description = "Filtre des produits One Piece")
-            @ModelAttribute ProductFilter filter) {
-        return productService.getOnePieceAll(filter);
+            @ModelAttribute @Nullable ProductFilter filter) {
+        return productService.getOnePieceAll(filter == null ? new ProductFilter() : filter);
     }
 
     @PostMapping("/syncCard")
@@ -57,4 +58,3 @@ public class ProductController {
         productExpansionSyncService.syncExpansionNames();
     }
 }
-
