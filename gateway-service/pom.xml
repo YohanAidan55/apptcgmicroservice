@@ -17,12 +17,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-         <!-- security-lib: shared security helpers (JWT, OAuth2 helpers, clients) -->
-         <dependency>
-             <groupId>com.aidan</groupId>
-             <artifactId>security-lib</artifactId>
-             <version>${project.version}</version>
-         </dependency>
          <dependency>
              <groupId>org.springframework.cloud</groupId>
              <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
