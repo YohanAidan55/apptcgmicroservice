@@ -14,19 +14,19 @@ spring:
               predicates:
                 - Path=/api/users/**
               filters:
-                - StripPrefix=2
+                - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
             - id: product-service
               uri: lb://product-service
               predicates:
                 - Path=/api/products/**
               filters:
-                - StripPrefix=2
+                - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
             - id: collection-service
               uri: lb://collection-service
               predicates:
                 - Path=/api/collections/**
               filters:
-                - StripPrefix=2
+                - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
 
 
 springdoc:

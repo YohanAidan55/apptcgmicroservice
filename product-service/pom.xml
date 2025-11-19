@@ -42,6 +42,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <version>4.1.75.Final</version>
+            <classifier>osx-aarch_64</classifier>
+        </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>
