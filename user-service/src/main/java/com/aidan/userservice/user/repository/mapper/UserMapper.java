@@ -13,5 +13,7 @@ public interface UserMapper {
 
     UserDTO toDto(UserEntity userEntity);
 
+    com.aidan.security.client.dto.UserDTO toDtoSecurity(UserEntity userEntity);
+
     List<UserDTO> toDto(List<UserEntity> userEntities);
 }

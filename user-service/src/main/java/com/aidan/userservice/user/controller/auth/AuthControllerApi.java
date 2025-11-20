@@ -5,16 +5,21 @@ import com.aidan.userservice.user.domain.dto.UserDTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @RequestMapping("/api/users/auth")
 public interface AuthControllerApi {
     @PostMapping("/register")
     UserDTO register(@RequestBody @Validated UserDTO userDTO);
+
+    @GetMapping("/by-email")
+    UserDTO getByEmail(@RequestParam String email);
+
+
 
     @PostMapping("/login")
     RegisterResponseDTO login(@RequestBody @Validated LoginRequest request);

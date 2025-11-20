@@ -36,6 +36,8 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
+
+
         <!-- Security / OAuth2 client -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,11 +53,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!-- LoadBalancer to support lb:// service resolution for WebClient/Feign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
+
 
         <!-- JJWT (JWT handling) split artifacts as recommended -->
         <dependency>

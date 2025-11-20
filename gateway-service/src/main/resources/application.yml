@@ -9,20 +9,20 @@ spring:
       server:
         webflux:
           routes:
-            - id: user-service
-              uri: lb://user-service
+            - id: USER-SERVICE
+              uri: lb://USER-SERVICE
               predicates:
                 - Path=/api/users/**
               filters:
                 - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
-            - id: product-service
-              uri: lb://product-service
+            - id: PRODUCT-SERVICE
+              uri: lb://PRODUCT-SERVICE
               predicates:
                 - Path=/api/products/**
               filters:
                 - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
-            - id: collection-service
-              uri: lb://collection-service
+            - id: COLLECTION-SERVICE
+              uri: lb://COLLECTION-SERVICE
               predicates:
                 - Path=/api/collections/**
               filters:
@@ -35,7 +35,7 @@ springdoc:
     path: /swagger-ui.html
     urls:
       - name: user-service
-        url: api/users/v3/api-docs
+        url: user-service/v3/api-docs
       - name: product-service
         url: api/products/v3/api-docs
       - name: collection-service
@@ -45,3 +45,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+

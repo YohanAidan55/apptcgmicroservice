@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-@FeignClient(name = "product-service", url = "http://localhost:8087", configuration =  FeignClientConfig.class)
+@FeignClient(name = "product-service", configuration =  FeignClientConfig.class)
 public interface ProductClient {
 
     @GetMapping("/api/products/{id}")

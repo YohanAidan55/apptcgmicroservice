@@ -1,11 +1,11 @@
 package com.aidan.security.autoconfig;
 
+import com.aidan.security.client.RemoteUserLookupService;
 import com.aidan.security.config.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.aidan.security.jwt.JwtService;
-import com.aidan.security.client.WebClientUserClient;
 import com.aidan.security.jwt.JwtAuthenticationFilter;
 import com.aidan.security.oauth2.OAuth2SuccessHandler;
 import com.aidan.security.oauth2.CustomOAuth2UserService;
@@ -18,16 +18,15 @@ import com.aidan.security.oauth2.CustomOAuth2UserService;
 @Configuration(proxyBeanMethods = false)
 @Import({
         SecurityConfig.class,
-        ClientConfig.class,
         ApplicationConfig.class,
         CorsConfig.class,
         SwaggerConfig.class,
         JwtService.class,
-        WebClientUserClient.class,
         JwtAuthenticationFilter.class,
         OAuth2SuccessHandler.class,
         CustomOAuth2UserService.class,
-        FeignClientConfig.class
+        FeignClientConfig.class,
+        RemoteUserLookupService.class,
 })
 public class SecurityAutoConfiguration {
 }

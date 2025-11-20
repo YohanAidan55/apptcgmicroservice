@@ -3,35 +3,46 @@ package com.aidan.userservice.user.controller.user;
 import com.aidan.userservice.user.domain.dto.UserDTO;
 import com.aidan.userservice.user.repository.UserRepository;
 import com.aidan.userservice.user.repository.mapper.UserMapper;
-import com.aidan.userservice.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class UserController implements UserControllerApi {
+@Slf4j
+@RequestMapping("/api/users")
+public class UserController {
 
     private final UserRepository userRepository;
-    private final UserService userService;
     private final UserMapper userMapper;
 
-    public UserDTO getCurrentUser(@org.springframework.security.core.annotation.AuthenticationPrincipal UserDetails userDetails) {
-        return userRepository.findByEmail(userDetails.getUsername())
-                .map(userMapper::toDto)
-                 .orElseThrow(() -> new IllegalStateException("User not found with email: " + userDetails.getUsername()));
-    }
-
+    @GetMapping("/all")
     public List<UserDTO> getAll() {
         return userMapper.toDto(userRepository.findAll());
     }
 
-    public UserDTO getByEmail(@RequestParam("email") String email) {
-        return userMapper.toDto(userService.getByEmail(email));
+    @GetMapping("/me")
+    public UserDTO getCurrentUser() {
+        log.debug("Entrée dans /api/users/me");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+       var  username = ((UserDetails) auth.getPrincipal()).getUsername();
+
+        return userRepository.findByEmail(username)
+                .map(userMapper::toDto)
+                .orElseThrow(() -> new IllegalStateException("User not found with email: " + username));
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        System.out.println("=> /test called !");
+        return "ok";
     }
 }

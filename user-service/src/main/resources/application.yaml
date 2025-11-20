@@ -1,4 +1,7 @@
 spring:
+  cloud:
+    discovery:
+      enabled: true
   application:
     name: user-service
   profiles:
@@ -15,9 +18,14 @@ spring:
           starttls.enable: true
 
 server:
-  port: 8081
+  port: 8082
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+
