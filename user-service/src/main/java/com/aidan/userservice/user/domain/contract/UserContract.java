@@ -1,5 +1,6 @@
 package com.aidan.userservice.user.domain.contract;
 
+import com.aidan.userservice.user.domain.enums.AuthenticationProvider;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
@@ -22,7 +23,9 @@ public interface UserContract {
     @Email
     String getEmail();
 
-    @NotNull
+    // Password can be null for OAuth providers
     @Length(min = 6, max = 50)
     String getPassword();
+
+    AuthenticationProvider getProvider();
 }

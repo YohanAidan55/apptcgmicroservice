@@ -2,6 +2,7 @@ package com.aidan.security.oauth2;
 
 
 import com.aidan.security.client.UserClient;
+import com.aidan.security.client.dto.AuthenticationProvider;
 import com.aidan.security.client.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,12 +32,22 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String lastName = (String) attributes.get("family_name");
 
         // Essaie de récupérer l'utilisateur via le user-service
-        UserDTO user = null;
         try {
-            user = userClient.getByEmail(email);
+            userClient.getByEmail(email);
         } catch (Exception ignored) {
-            // si l'appel échoue, on ne crée pas d'utilisateur ici —
-            // le microservice user doit gérer la création si nécessaire.
+            // si l'appel échoue ou que l'utilisateur n'existe pas, on tente de le créer
+            try {
+                UserDTO toCreate = new UserDTO();
+                toCreate.setEmail(email);
+                toCreate.setUserName(userName);
+                toCreate.setFirstName(firstName);
+                toCreate.setLastName(lastName);
+                toCreate.setProvider(AuthenticationProvider.GOOGLE);
+                // pas de mot de passe => compte OAuth2
+                userClient.register(toCreate);
+            } catch (Exception ignored2) {
+                // si la création échoue, on continue la connexion OAuth2 quand même
+            }
         }
 
         // Retourne un OAuth2User Spring Security standard

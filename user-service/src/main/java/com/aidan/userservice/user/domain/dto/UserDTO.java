@@ -3,7 +3,7 @@ package com.aidan.userservice.user.domain.dto;
 
 import com.aidan.userservice.user.domain.contract.UserContract;
 import com.aidan.userservice.user.domain.enums.RoleEnum;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.aidan.userservice.user.domain.enums.AuthenticationProvider;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -22,4 +22,5 @@ public class UserDTO implements UserContract {
     private String password;
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private RoleEnum role;
+    private AuthenticationProvider provider;
 }

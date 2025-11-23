@@ -23,9 +23,15 @@ public class CollectionEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "user_id", length = 36)
+    private java.util.UUID userId;
+
     @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CollectionProductEntity> collectionProducts = new ArrayList<>();
 
     @Column(name = "total_products")
     private Integer totalProducts = 0;
+
+    @Column(name = "favorite")
+    private Boolean favorite = false;
 }

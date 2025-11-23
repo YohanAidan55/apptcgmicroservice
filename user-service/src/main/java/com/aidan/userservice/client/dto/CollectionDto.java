@@ -1,20 +1,20 @@
-package com.aidan.collectionservice.controller.dto;
+package com.aidan.userservice.client.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class CollectionDto {
     private UUID id;
     private String name;
     private Integer totalProducts;
-    private UUID userId;
-    private List<CollectionProductDto> collectionProducts;
     private Boolean favorite;
 }
+

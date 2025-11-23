@@ -14,5 +14,5 @@ public class UserDTO {
     private String email;
     private RoleEnum role;
     private String password;
+    private AuthenticationProvider provider;
 }
-

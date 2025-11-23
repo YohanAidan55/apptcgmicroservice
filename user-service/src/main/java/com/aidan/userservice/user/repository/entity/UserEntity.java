@@ -1,6 +1,7 @@
 package com.aidan.userservice.user.repository.entity;
 
 import com.aidan.userservice.user.domain.enums.RoleEnum;
+import com.aidan.userservice.user.domain.enums.AuthenticationProvider;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,4 +34,7 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
+
+    @Enumerated(EnumType.STRING)
+    private AuthenticationProvider provider;
 }

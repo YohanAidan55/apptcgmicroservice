@@ -1,22 +1,28 @@
 package com.aidan.userservice.user.service;
 
+import com.aidan.userservice.client.CollectionClient;
+import com.aidan.userservice.client.dto.CreateCollectionRequest;
+import com.aidan.userservice.client.dto.CollectionDto;
 import com.aidan.userservice.exception.ApiException;
 import com.aidan.userservice.exception.NotFoundException;
 import com.aidan.userservice.notification.controller.NotificationControllerApi;
 import com.aidan.security.jwt.JwtService;
 import com.aidan.userservice.user.domain.dto.UserDTO;
 import com.aidan.userservice.user.domain.enums.RoleEnum;
+import com.aidan.userservice.user.domain.enums.AuthenticationProvider;
 import com.aidan.userservice.user.repository.UserRepository;
 import com.aidan.userservice.user.repository.entity.UserEntity;
 import com.aidan.userservice.user.repository.mapper.UserMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthService {
 
     private final UserRepository userRepository;
@@ -24,6 +30,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final NotificationControllerApi notificationControllerApi;
     private final JwtService jwtService;
+    private final CollectionClient collectionClient; // Feign client (peut être proxyé)
 
     @Transactional
     public UserDTO register(UserDTO userDTO) {
@@ -38,13 +45,47 @@ public class AuthService {
                         );
                     }
                 });
+
         UserEntity userEntity = userMapper.toEntity(userDTO);
-        userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        userEntity.setEnabled(false);
-        userEntity.setRole(RoleEnum.ROLE_USER);
-        String confirmedToken = jwtService.generateTokenEmail(userDTO.getEmail(), 5);
-        notificationControllerApi.sendRegistrationEmail(userDTO.getEmail(), confirmedToken);
-        return userMapper.toDto(userRepository.save(userEntity));
+
+        // Déterminer le provider ; par défaut INTERNAL
+        AuthenticationProvider provider = userDTO.getProvider() == null ? AuthenticationProvider.INTERNAL : userDTO.getProvider();
+        userEntity.setProvider(provider);
+
+        if (provider == AuthenticationProvider.GOOGLE) {
+            // Compte OAuth2 : pas de mot de passe, on crée le compte activé directement
+            userEntity.setPassword(null);
+            userEntity.setEnabled(true);
+            userEntity.setRole(RoleEnum.ROLE_USER);
+            // Pas d'email de confirmation pour les comptes OAuth
+            UserEntity saved = userRepository.save(userEntity);
+
+            // Créer une collection "main" pour l'utilisateur (le collection-service récupère l'userId depuis le contexte de sécurité)
+            try {
+                CreateCollectionRequest req = new CreateCollectionRequest("main");
+                CollectionDto created = collectionClient.create(req);
+                if (created != null && created.getId() != null) {
+                    collectionClient.setFavorite(created.getId());
+                }
+            } catch (Exception e) {
+                log.warn("Échec création collection 'main' pour user {}: {}", saved.getId(), e.getMessage());
+            }
+
+            return userMapper.toDto(saved);
+        } else {
+            // Inscription classique (INTERNAL)
+            String password = userDTO.getPassword();
+            if (password == null || password.isBlank()) {
+                throw new ApiException("PASSWORD_REQUIRED", "Mot de passe requis pour une inscription interne");
+            }
+
+            userEntity.setPassword(passwordEncoder.encode(password));
+            userEntity.setEnabled(false);
+            userEntity.setRole(RoleEnum.ROLE_USER);
+            String confirmedToken = jwtService.generateTokenEmail(userDTO.getEmail(), 5);
+            notificationControllerApi.sendRegistrationEmail(userDTO.getEmail(), confirmedToken);
+            return userMapper.toDto(userRepository.save(userEntity));
+        }
     }
 
     @Transactional
@@ -58,9 +99,21 @@ public class AuthService {
         UserEntity userEntity = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalStateException("User not found with email: " + email));
         userEntity.setEnabled(true);
-        return userMapper.toDto(userRepository.save(userEntity));
-    }
+        UserEntity saved = userRepository.save(userEntity);
 
+        // Créer une collection "main" pour l'utilisateur (le collection-service récupère l'userId depuis le contexte de sécurité)
+        try {
+            CreateCollectionRequest req = new CreateCollectionRequest("main");
+            CollectionDto created = collectionClient.create(req);
+            if (created != null && created.getId() != null) {
+                collectionClient.setFavorite(created.getId());
+            }
+        } catch (Exception e) {
+            log.warn("Échec création collection 'main' pour user {}: {}", saved.getId(), e.getMessage());
+        }
+
+        return userMapper.toDto(saved);
+    }
 
     @Transactional
     public void requestPasswordReset(String email) {

@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.aidan.security.client")
+@EnableFeignClients(basePackages = {"com.aidan.security.client", "com.aidan.userservice.client"})
 public class UserServiceApplication {
 
     public static void main(String[] args) {

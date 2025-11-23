@@ -5,8 +5,6 @@ import com.aidan.userservice.user.domain.dto.UserDTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +16,6 @@ public interface AuthControllerApi {
 
     @GetMapping("/by-email")
     UserDTO getByEmail(@RequestParam String email);
-
-
 
     @PostMapping("/login")
     RegisterResponseDTO login(@RequestBody @Validated LoginRequest request);

@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20251123-1
+      author: yohanaidan
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: provider
+                  type: VARCHAR(255)
+

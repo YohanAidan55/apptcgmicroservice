@@ -5,7 +5,6 @@ import com.aidan.collectionservice.controller.dto.CollectionProductDto;
 import com.aidan.collectionservice.repository.entity.CollectionEntity;
 import com.aidan.collectionservice.repository.entity.CollectionProductEntity;
 import org.mapstruct.Mapper;
-import org.mapstruct.SubclassExhaustiveStrategy;
 
 import java.util.List;
 
@@ -19,4 +18,3 @@ public abstract class CollectionMapper {
     public abstract List<CollectionDto> toDto(List<CollectionEntity> entity);
 
 }
-
