@@ -15,31 +15,43 @@ spring:
                 - Path=/api/users/**
               filters:
                 - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
+            - id: USER-SERVICE-DOCS
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/user-service/v3/api-docs
+              filters:
+                - RewritePath=/user-service/v3/api-docs, /v3/api-docs
             - id: PRODUCT-SERVICE
               uri: lb://PRODUCT-SERVICE
               predicates:
                 - Path=/api/products/**
               filters:
                 - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
+            - id: PRODUCT-SERVICE-DOCS
+              uri: lb://PRODUCT-SERVICE
+              predicates:
+                - Path=/product-service/v3/api-docs
+              filters:
+                - RewritePath=/product-service/v3/api-docs, /v3/api-docs
             - id: COLLECTION-SERVICE
               uri: lb://COLLECTION-SERVICE
               predicates:
                 - Path=/api/collections/**
               filters:
                 - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
-
+            - id: COLLECTION-SERVICE-DOCS
+              uri: lb://COLLECTION-SERVICE
+              predicates:
+                - Path=/collection-service/v3/api-docs
+              filters:
+                - RewritePath=/collection-service/v3/api-docs, /v3/api-docs
 
 springdoc:
+  api-docs:
+    path: /v3/api-docs
   swagger-ui:
-    enabled: true
     path: /swagger-ui.html
-    urls:
-      - name: user-service
-        url: user-service/v3/api-docs
-      - name: product-service
-        url: api/products/v3/api-docs
-      - name: collection-service
-        url: api/collections/v3/api-docs
+
 
 eureka:
   client:
@@ -49,4 +61,3 @@ eureka:
     register-with-eureka: true
   instance:
     prefer-ip-address: true
-
