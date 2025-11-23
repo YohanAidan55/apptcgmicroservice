@@ -28,8 +28,7 @@ public class SwaggerConfig {
         // Récupérer tous les services enregistrés dans Eureka
         discoveryClient.getServices().forEach(serviceName -> {
             // Exclure le gateway lui-même et eureka-server
-            if (!serviceName.equalsIgnoreCase("gateway-service")
-                    && !serviceName.equalsIgnoreCase("discovery-server")) {
+            if (!serviceName.equalsIgnoreCase("gateway-service")) {
 
                 SwaggerUiConfigProperties.SwaggerUrl swaggerUrl =
                         new SwaggerUiConfigProperties.SwaggerUrl();
