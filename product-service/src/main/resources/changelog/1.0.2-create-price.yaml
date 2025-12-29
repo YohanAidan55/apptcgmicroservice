@@ -1,0 +1,97 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1761906509387-11
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: price
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_price
+              - column:
+                  name: avg_price
+                  type: DECIMAL(19,4)
+              - column:
+                  name: normal_price
+                  type: DECIMAL(19,4)
+              - column:
+                  name: price_type
+                  type: VARCHAR(31)
+  - changeSet:
+      id: 1761906509387-12
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: cardmarket_price
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_cardmarket_price
+              - column:
+                  name: cardmarket_listing_price
+                  type: DECIMAL(19,4)
+              - column:
+                  name: cardmarket_sold_price
+                  type: DECIMAL(19,4)
+        - addForeignKeyConstraint:
+            baseTableName: cardmarket_price
+            baseColumnNames: id
+            constraintName: fk_cardmarket_price_price
+            referencedTableName: price
+            referencedColumnNames: id
+  - changeSet:
+      id: 1761906509387-13
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: ebay_price
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_ebay_price
+              - column:
+                  name: ebay_buy_it_now_price
+                  type: DECIMAL(19,4)
+              - column:
+                  name: ebay_current_bid
+                  type: DECIMAL(19,4)
+        - addForeignKeyConstraint:
+            baseTableName: ebay_price
+            baseColumnNames: id
+            constraintName: fk_ebay_price_price
+            referencedTableName: price
+            referencedColumnNames: id
+  - changeSet:
+      id: 1761906509387-14
+      author: yohanaidan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            tableName: product
+            columns:
+              - column:
+                  name: price_id
+                  type: UUID
+        - addForeignKeyConstraint:
+            baseTableName: product
+            baseColumnNames: price_id
+            constraintName: fk_product_price
+            referencedTableName: price
+            referencedColumnNames: id
+

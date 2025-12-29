@@ -52,7 +52,7 @@ public abstract class ProductMapper {
         Integer categoryId = meta.getCategoryId();
         Integer productId = meta.getProductId();
 
-        if (categoryId == null || productId == null) {
+        if (categoryId == null || productId == null || source.getExpansion() == null) {
             return;
         }
 

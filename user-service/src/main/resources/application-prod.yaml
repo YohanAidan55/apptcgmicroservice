@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: user-service
   datasource:
     url: jdbc:postgresql://dpg-d43m5hbipnbc73c30ocg-a.frankfurt-postgres.render.com:5432/apptcgdb
     username: user

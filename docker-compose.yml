@@ -1,0 +1,67 @@
+services:
+  discovery-service:
+    image: discovery-service:latest
+    build:
+      context: ./discovery-service
+      dockerfile: Dockerfile
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+    networks:
+      - spring-network
+
+  user-service:
+    image: user-service:latest
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    container_name: user-service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8761/eureka/
+    ports:
+      - "8082:8082"
+    networks:
+      - spring-network
+
+  product-service:
+    image: product-service:latest
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+    container_name: product-service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8761/eureka/
+    ports:
+      - "8083:8083"
+    networks:
+      - spring-network
+
+  collection-service:
+    image: collection-service:latest
+    build:
+      context: ./collection-service
+      dockerfile: Dockerfile
+    container_name: collection-service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8761/eureka/
+    ports:
+      - "8081:8081"
+    networks:
+      - spring-network
+
+  gateway-service:
+    image: gateway-service:latest
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8761/eureka/
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-network
+
+networks:
+  spring-network:
+    driver: bridge

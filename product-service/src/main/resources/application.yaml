@@ -3,12 +3,12 @@ spring:
     discovery:
       enabled: true
   application:
-    name: product-service
+    name: PRODUCT-SERVICE
   profiles:
     active: ${env}
 
 server:
-  port: 8087
+  port: 8083
 
 eureka:
   client:

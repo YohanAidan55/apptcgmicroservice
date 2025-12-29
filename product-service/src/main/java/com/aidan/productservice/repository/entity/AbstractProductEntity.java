@@ -35,6 +35,10 @@ public abstract class AbstractProductEntity {
     @OneToOne(fetch = FetchType.EAGER)
     private ExpansionEntity expansion;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "price_id")
+    private AbstractPriceEntity price;
+
     protected AbstractProductEntity(ProductFamilyType type) {
         this.productFamilyType = type;
     }

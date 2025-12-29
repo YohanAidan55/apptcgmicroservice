@@ -3,3 +3,5 @@ databaseChangeLog:
       file: classpath:/changelog/1.0.0.yaml
   - include:
       file: classpath:/changelog/1.0.1-create-expansion.yaml
+  - include:
+      file: classpath:/changelog/1.0.2-create-price.yaml

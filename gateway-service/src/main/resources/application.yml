@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: gateway-service
+    name: GATEWAY-SERVICE
   cloud:
     gateway:
       server:
@@ -21,6 +21,8 @@ spring:
                 - Path=/user-service/v3/api-docs
               filters:
                 - RewritePath=/user-service/v3/api-docs, /v3/api-docs
+                - AddRequestHeader=X-Forwarded-Prefix, /api/users
+                - PreserveHostHeader
             - id: PRODUCT-SERVICE
               uri: lb://PRODUCT-SERVICE
               predicates:
@@ -33,6 +35,8 @@ spring:
                 - Path=/product-service/v3/api-docs
               filters:
                 - RewritePath=/product-service/v3/api-docs, /v3/api-docs
+                - AddRequestHeader=X-Forwarded-Prefix, /api/products
+                - PreserveHostHeader
             - id: COLLECTION-SERVICE
               uri: lb://COLLECTION-SERVICE
               predicates:
@@ -45,12 +49,22 @@ spring:
                 - Path=/collection-service/v3/api-docs
               filters:
                 - RewritePath=/collection-service/v3/api-docs, /v3/api-docs
+                - AddRequestHeader=X-Forwarded-Prefix, /api/collections
+                - PreserveHostHeader
 
 springdoc:
   api-docs:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+    urls:
+      - name: User Service
+        url: /user-service/v3/api-docs
+      - name: Product Service
+        url: /product-service/v3/api-docs
+      - name: Collection Service
+        url: /collection-service/v3/api-docs
+  use-management-port: false
 
 
 eureka:
