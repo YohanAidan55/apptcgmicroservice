@@ -40,10 +40,9 @@ jwt:
 app:
   oauth2:
     redirect-url: http://localhost:8100/oauth2/callback
-logging:
-    level:
-        org:
-        springframework:
-            security: INFO
-            web: INFO
-        root: INFO
+
+  services:
+    collection-service:
+      url: http://localhost:8081
+    user-service:
+      url: http://localhost:8082

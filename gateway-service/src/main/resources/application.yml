@@ -10,13 +10,13 @@ spring:
         webflux:
           routes:
             - id: USER-SERVICE
-              uri: lb://USER-SERVICE
+              uri: http://user-service:8082
               predicates:
                 - Path=/api/users/**
               filters:
                 - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
             - id: USER-SERVICE-DOCS
-              uri: lb://USER-SERVICE
+              uri: http://user-service:8082
               predicates:
                 - Path=/user-service/v3/api-docs
               filters:
@@ -24,13 +24,13 @@ spring:
                 - AddRequestHeader=X-Forwarded-Prefix, /api/users
                 - PreserveHostHeader
             - id: PRODUCT-SERVICE
-              uri: lb://PRODUCT-SERVICE
+              uri: http://product-service:8083
               predicates:
                 - Path=/api/products/**
               filters:
                 - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
             - id: PRODUCT-SERVICE-DOCS
-              uri: lb://PRODUCT-SERVICE
+              uri: http://product-service:8083
               predicates:
                 - Path=/product-service/v3/api-docs
               filters:
@@ -38,13 +38,13 @@ spring:
                 - AddRequestHeader=X-Forwarded-Prefix, /api/products
                 - PreserveHostHeader
             - id: COLLECTION-SERVICE
-              uri: lb://COLLECTION-SERVICE
+              uri: http://collection-service:8081
               predicates:
                 - Path=/api/collections/**
               filters:
                 - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary, RETAIN_FIRST
             - id: COLLECTION-SERVICE-DOCS
-              uri: lb://COLLECTION-SERVICE
+              uri: http://collection-service:8081
               predicates:
                 - Path=/collection-service/v3/api-docs
               filters:
@@ -65,13 +65,3 @@ springdoc:
       - name: Collection Service
         url: /collection-service/v3/api-docs
   use-management-port: false
-
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-    fetch-registry: true
-    register-with-eureka: true
-  instance:
-    prefer-ip-address: true

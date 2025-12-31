@@ -1,15 +1,4 @@
 services:
-  discovery-service:
-    image: discovery-service:latest
-    build:
-      context: ./discovery-service
-      dockerfile: Dockerfile
-    container_name: discovery-service
-    ports:
-      - "8761:8761"
-    networks:
-      - spring-network
-
   user-service:
     image: user-service:latest
     build:
@@ -17,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: user-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8761/eureka/
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8082:8082"
     networks:
@@ -30,7 +19,7 @@ services:
       dockerfile: Dockerfile
     container_name: product-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8761/eureka/
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8083:8083"
     networks:
@@ -43,7 +32,7 @@ services:
       dockerfile: Dockerfile
     container_name: collection-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8761/eureka/
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8081:8081"
     networks:
@@ -56,7 +45,7 @@ services:
       dockerfile: Dockerfile
     container_name: gateway-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8761/eureka/
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8080:8080"
     networks:

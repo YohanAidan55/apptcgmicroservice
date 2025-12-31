@@ -1,6 +1,9 @@
 spring:
+  cloud:
+    discovery:
+      enabled: false
   datasource:
-    url: jdbc:h2:file:./collection-service/data/db/DB_COLLECTION;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:file:./product-service/data/db/DB_PRODUCT;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     username: sa
     password:
   jpa:
@@ -29,11 +32,6 @@ spring:
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
   liquibase:
     change-log: classpath:/changelog/db.changelog-master.yaml
-
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:data-local.sql
 jwt:
   secret: ${JWT_SECRET:YOUR_VERY_LONG_SECRET_HERE}
   expiration-ms: 604800000 # 7 days en ms
@@ -42,6 +40,4 @@ app:
     redirect-url: http://localhost:8100/oauth2/callback
   services:
     user-service:
-      url: http://localhost:8082
-    product-service:
-      url: http://localhost:8083
+      url: http://user-service:8082

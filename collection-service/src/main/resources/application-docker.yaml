@@ -42,6 +42,6 @@ app:
     redirect-url: http://localhost:8100/oauth2/callback
   services:
     user-service:
-      url: http://localhost:8082
+      url: http://user-service:8082
     product-service:
-      url: http://localhost:8083
+      url: http://product-service:8083

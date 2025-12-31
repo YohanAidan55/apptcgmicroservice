@@ -15,7 +15,6 @@
         <module>security-lib</module>
         <module>user-service</module>
         <module>gateway-service</module>
-        <module>discovery-service</module>
         <module>product-service</module>
         <module>collection-service</module>
     </modules>

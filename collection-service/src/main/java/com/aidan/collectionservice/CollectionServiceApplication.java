@@ -9,7 +9,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableFeignClients(clients = {UserClient.class, ProductClient.class})
 @EnableScheduling
 public class CollectionServiceApplication {

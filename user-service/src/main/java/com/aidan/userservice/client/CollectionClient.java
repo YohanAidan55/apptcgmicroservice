@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "COLLECTION-SERVICE", path = "/api/collections", configuration = FeignClientConfig.class)
+@FeignClient(
+    name = "collection-service",
+    url = "${app.services.collection-service.url}",
+    path = "/api/collections", 
+    configuration = FeignClientConfig.class
+)
 public interface CollectionClient {
 
     @PostMapping
