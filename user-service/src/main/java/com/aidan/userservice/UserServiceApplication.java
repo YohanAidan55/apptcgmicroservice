@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
+@EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.aidan.security.client", "com.aidan.userservice.client"})
 public class UserServiceApplication {
 

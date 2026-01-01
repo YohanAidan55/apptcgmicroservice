@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableFeignClients(clients = {UserClient.class, ProductClient.class})
 @EnableScheduling
+@EnableDiscoveryClient
 public class CollectionServiceApplication {
 
     public static void main(String[] args) {

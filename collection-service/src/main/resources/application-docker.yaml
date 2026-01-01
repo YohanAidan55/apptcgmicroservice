@@ -1,14 +1,13 @@
 spring:
   datasource:
-    url: jdbc:h2:file:./collection-service/data/db/DB_COLLECTION;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
+    url: jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=collectionservice
+    username: user_collectionservice
+    password: password_collectionservice
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: none
     show-sql: true
-    properties:
-      hibernate.dialect: org.hibernate.dialect.H2Dialect
   h2:
     console:
       enabled: true
@@ -29,6 +28,7 @@ spring:
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
   liquibase:
     change-log: classpath:/changelog/db.changelog-master.yaml
+    default-schema: collectionservice
 
   sql:
     init:
@@ -45,3 +45,11 @@ app:
       url: http://user-service:8082
     product-service:
       url: http://product-service:8083
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true

@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: varchar(36)
+                  type: uuid
                   constraints:
                     primaryKey: true
               - column:
@@ -26,15 +26,15 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: varchar(36)
+                  type: uuid
                   constraints:
                     primaryKey: true
               - column:
                   name: collection_id
-                  type: varchar(36)
+                  type: uuid
               - column:
                   name: product_id
-                  type: varchar(36)
+                  type: uuid
               - column:
                   name: quantity
                   type: integer
